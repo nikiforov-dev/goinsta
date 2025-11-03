@@ -186,7 +186,7 @@ type Tag struct {
 
 // Caption is media caption
 type Caption struct {
-	ID              int64  `json:"pk"`
+	ID              string `json:"pk"`
 	UserID          int64  `json:"user_id"`
 	Text            string `json:"text"`
 	Type            int    `json:"type"`
