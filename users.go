@@ -43,7 +43,7 @@ var ErrNoMore = errors.New("List end have been reached")
 // Next allows to paginate after calling:
 // Account.Follow* and User.Follow*
 //
-// New user list is stored inside Users
+// # New user list is stored inside Users
 //
 // returns false when list reach the end.
 func (users *Users) Next() bool {
@@ -158,7 +158,7 @@ type User struct {
 	PublicPhoneNumber            string       `json:"public_phone_number"`
 	PublicPhoneCountryCode       string       `json:"public_phone_country_code"`
 	ContactPhoneNumber           string       `json:"contact_phone_number"`
-	CityID                       int64        `json:"city_id"`
+	CityID                       string       `json:"city_id"`
 	CityName                     string       `json:"city_name"`
 	AddressStreet                string       `json:"address_street"`
 	DirectMessaging              string       `json:"direct_messaging"`
@@ -193,8 +193,8 @@ func (inst *Instagram) NewUser() *User {
 
 // Sync updates user info
 //
-// 	params can be:
-// 		bool: must be true if you want to include FriendShip call. See goinsta.FriendShip
+//	params can be:
+//		bool: must be true if you want to include FriendShip call. See goinsta.FriendShip
 //
 // See example: examples/user/friendship.go
 func (user *User) Sync(params ...interface{}) error {
@@ -221,7 +221,7 @@ func (user *User) Sync(params ...interface{}) error {
 
 // Following returns a list of user following.
 //
-// Users.Next can be used to paginate
+// # Users.Next can be used to paginate
 //
 // See example: examples/user/following.go
 func (user *User) Following() *Users {
@@ -233,7 +233,7 @@ func (user *User) Following() *Users {
 
 // Followers returns a list of user followers.
 //
-// Users.Next can be used to paginate
+// # Users.Next can be used to paginate
 //
 // See example: examples/user/followers.go
 func (user *User) Followers() *Users {
@@ -382,7 +382,7 @@ func generateMuteData(user *User, opt muteOption) map[string]interface{} {
 // This function performs a follow call. If user is private
 // you have to wait until he/she accepts you.
 //
-// If the account is public User.Friendship will be updated
+// # If the account is public User.Friendship will be updated
 //
 // See example: examples/user/follow.go
 func (user *User) Follow() error {
@@ -417,7 +417,7 @@ func (user *User) Follow() error {
 
 // Unfollow unfollows user
 //
-// User.Friendship will be updated
+// # User.Friendship will be updated
 //
 // See example: examples/user/unfollow.go
 func (user *User) Unfollow() error {
@@ -478,8 +478,8 @@ func (user *User) FriendShip() error {
 
 // Feed returns user feeds (media)
 //
-// 	params can be:
-// 		string: timestamp of the minimum media timestamp.
+//	params can be:
+//		string: timestamp of the minimum media timestamp.
 //
 // For pagination use FeedMedia.Next()
 //
