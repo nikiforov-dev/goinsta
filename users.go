@@ -20,6 +20,7 @@ type Users struct {
 
 	Status    string          `json:"status"`
 	BigList   bool            `json:"big_list"`
+	HasMore   bool            `json:"has_more"`
 	Users     []User          `json:"users"`
 	PageSize  int             `json:"page_size"`
 	RawNextID json.RawMessage `json:"next_max_id"`
@@ -68,7 +69,10 @@ func (users *Users) Next() bool {
 		usrs := Users{}
 		err = json.Unmarshal(body, &usrs)
 		if err == nil {
-			if len(usrs.RawNextID) > 0 && usrs.RawNextID[0] == '"' && usrs.RawNextID[len(usrs.RawNextID)-1] == '"' {
+
+			if !usrs.HasMore {
+				// do nothing
+			} else if len(usrs.RawNextID) > 0 && usrs.RawNextID[0] == '"' && usrs.RawNextID[len(usrs.RawNextID)-1] == '"' {
 				if err := json.Unmarshal(usrs.RawNextID, &usrs.NextID); err != nil {
 					users.err = err
 					return false
