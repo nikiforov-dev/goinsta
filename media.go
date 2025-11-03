@@ -55,7 +55,7 @@ type Item struct {
 	Comments *Comments `json:"-"`
 
 	TakenAt          int64   `json:"taken_at"`
-	Pk               string  `json:"pk"`
+	Pk               int64   `json:"pk"`
 	ID               string  `json:"id"`
 	CommentsDisabled bool    `json:"comments_disabled"`
 	DeviceTimestamp  int64   `json:"device_timestamp"`
