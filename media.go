@@ -55,7 +55,7 @@ type Item struct {
 	Comments *Comments `json:"-"`
 
 	TakenAt          int64   `json:"taken_at"`
-	Pk               int64   `json:"pk"`
+	Pk               string  `json:"pk"`
 	ID               string  `json:"id"`
 	CommentsDisabled bool    `json:"comments_disabled"`
 	DeviceTimestamp  int64   `json:"device_timestamp"`
@@ -623,7 +623,7 @@ func (item *Item) StoryIsCloseFriends() bool {
 	return item.Audience == "besties"
 }
 
-//Media interface defines methods for both StoryMedia and FeedMedia.
+// Media interface defines methods for both StoryMedia and FeedMedia.
 type Media interface {
 	// Next allows pagination
 	Next(...interface{}) bool
@@ -637,7 +637,7 @@ type Media interface {
 	instagram() *Instagram
 }
 
-//StoryMedia is the struct that handles the information from the methods to get info about Stories.
+// StoryMedia is the struct that handles the information from the methods to get info about Stories.
 type StoryMedia struct {
 	inst     *Instagram
 	endpoint string
@@ -803,7 +803,6 @@ func (media *StoryMedia) Sync() error {
 
 // Next allows pagination after calling:
 // User.Stories
-//
 //
 // returns false when list reach the end
 // if StoryMedia.Error() is ErrNoMore no problem have been occurred.
